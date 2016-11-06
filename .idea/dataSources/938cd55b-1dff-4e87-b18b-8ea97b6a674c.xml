@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataSource name="MySQL - efind@localhost">
+  <database-model serializer="dbm" rdbms="MYSQL" format-version="2.6">
+    <schema id="1" name="efind">
+      <visible>1</visible>
+    </schema>
+    <schema id="2" name="information_schema"/>
+    <schema id="3" name="mysql"/>
+    <schema id="4" name="performance_schema"/>
+    <schema id="5" name="sakila"/>
+    <schema id="6" name="sys"/>
+    <schema id="7" name="world"/>
+    <table id="8" parent="1" name="profile_student"/>
+    <table id="9" parent="1" name="users"/>
+    <column id="10" parent="8" name="uid">
+      <mandatory>1</mandatory>
+      <data-type>int(11)|0</data-type>
+    </column>
+    <column id="11" parent="8" name="tnumber">
+      <mandatory>1</mandatory>
+      <data-type>varchar(45)|0</data-type>
+    </column>
+    <column id="12" parent="8" name="departname">
+      <data-type>varchar(45)|0</data-type>
+    </column>
+    <column id="13" parent="8" name="program">
+      <data-type>varchar(45)|0</data-type>
+    </column>
+    <column id="14" parent="8" name="gpa">
+      <data-type>varchar(45)|0</data-type>
+    </column>
+    <column id="15" parent="8" name="telephone">
+      <data-type>varchar(45)|0</data-type>
+    </column>
+    <key id="16" parent="8" name="PRIMARY">
+      <columns>tnumber</columns>
+      <primary>1</primary>
+    </key>
+    <column id="17" parent="9" name="uid">
+      <mandatory>1</mandatory>
+      <data-type>int(11)|0</data-type>
+      <sequence-identity>1</sequence-identity>
+    </column>
+    <column id="18" parent="9" name="username">
+      <data-type>varchar(45)|0</data-type>
+    </column>
+    <column id="19" parent="9" name="firstname">
+      <data-type>varchar(45)|0</data-type>
+    </column>
+    <column id="20" parent="9" name="lastname">
+      <data-type>varchar(45)|0</data-type>
+    </column>
+    <column id="21" parent="9" name="email_id">
+      <data-type>varchar(45)|0</data-type>
+    </column>
+    <column id="22" parent="9" name="account_type">
+      <data-type>enum(&apos;faculty&apos;, &apos;student&apos;)|0</data-type>
+    </column>
+    <column id="23" parent="9" name="password">
+      <data-type>varchar(45)|0</data-type>
+    </column>
+    <key id="24" parent="9" name="PRIMARY">
+      <columns>uid</columns>
+      <primary>1</primary>
+    </key>
+  </database-model>
+</dataSource>
