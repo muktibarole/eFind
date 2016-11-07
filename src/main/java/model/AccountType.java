@@ -5,4 +5,5 @@ package model;
  */
 public enum AccountType {
     student,faculty;
+
 }
