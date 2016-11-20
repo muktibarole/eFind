@@ -3,6 +3,7 @@
 This is a starter template page. Use this page to start your new project from
 scratch. This page gets rid of all links and provides the needed markup only.
 -->
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <html>
 <head>
   <meta charset="utf-8">
@@ -118,7 +119,7 @@ desired effect
               <!-- The user image in the navbar-->
               <img src="vendors/Dashboard/dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
               <!-- hidden-xs hides the username on small devices so only the image appears. -->
-              <span class="hidden-xs">User</span>
+              <span class="hidden-xs"><c:out value="${users.getFirstName()}"/></span>
             </a>
             <ul class="dropdown-menu">
               <!-- The user image in the menu -->
@@ -138,7 +139,7 @@ desired effect
                   <a href="#" class="btn btn-default btn-flat">Profile</a>
                 </div>
                 <div class="pull-right">
-                  <a href="#" class="btn btn-default btn-flat">Sign out</a>
+                  <form  class="btn btn-default btn-flat" action="index.html">Sign out</form>
                 </div>
               </li>
             </ul>
@@ -161,7 +162,7 @@ desired effect
           <img src="vendors/Dashboard/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
         </div>
         <div class="pull-left info">
-          <p>User</p>
+          <p>${users.getFirstName()} ${users.getLastName()}</p>
           <!-- Status -->
           <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
         </div>
@@ -239,7 +240,6 @@ desired effect
 <script src="vendors/Dashboard/bootstrap/js/bootstrap.min.js"></script>
 <!-- AdminLTE App -->
 <script src="vendors/Dashboard/dist/js/app.min.js"></script>
-
 <!-- Optionally, you can add Slimscroll and FastClick plugins.
      Both of these plugins are recommended to enhance the
      user experience. Slimscroll is required when using the
