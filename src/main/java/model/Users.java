@@ -14,9 +14,9 @@ public  class Users {
     private String emailId;
     private String password;
     private String telephone;
-    private AccountType accountType;
+    private String accountType;
 
-    public Users(String username, String firstName, String lastName, String emailId, String password, String telephone, AccountType accountType) {
+    public Users(String username, String firstName, String lastName, String emailId, String password, String telephone, String accountType) {
         this.username = username;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -26,7 +26,7 @@ public  class Users {
         this.accountType = accountType;
     }
 
-    public Users(int uid, String username, String firstName, String lastName, String emailId, String password, String telephone, AccountType accountType) {
+    public Users(int uid, String username, String firstName, String lastName, String emailId, String password, String telephone, String accountType) {
         this(username, firstName, lastName, emailId, password, telephone, accountType);
         this.uid = uid;
     }
@@ -59,7 +59,7 @@ public  class Users {
         return telephone;
     }
 
-    public AccountType getAccountType() {
+    public String getAccountType() {
         return accountType;
     }
 }

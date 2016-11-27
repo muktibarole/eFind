@@ -139,7 +139,8 @@ desired effect
                   <a href="#" class="btn btn-default btn-flat">Profile</a>
                 </div>
                 <div class="pull-right">
-                  <form  class="btn btn-default btn-flat" action="index.html">Sign out</form>
+                  <form  class="btn btn-default btn-flat" action="signout"method="post">
+                    <button type="submit" >Sign Out</button></form>
                 </div>
               </li>
             </ul>
