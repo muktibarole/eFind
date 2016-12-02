@@ -1,5 +1,6 @@
 package controller;
 
+import model.Profile;
 import model.Users;
 import util.ConnectionManager;
 import util.DataHandler;
@@ -9,13 +10,12 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Queue;
+import java.util.*;
 
 /**
  * Created by Prajwal on 11/20/2016.
@@ -23,11 +23,13 @@ import java.util.Queue;
 public class LoginController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        List <Users>userList= new ArrayList<Users>();
+        Map<Users,Profile> userMap= new LinkedHashMap<Users, Profile>();
+        //Set<Users>s=new TreeSet<Users>();
         String username= request.getParameter("username");
         String password= request.getParameter("password");
+        HttpSession session=request.getSession();
 
-        String query="select * from users where username='"+username+"' and password='"+password+"'";
+        String query="select users.*,profile.* from users inner join profile on users.username=profile.username where users.username='"+username+"' and users.password='"+password+"'";
         DataHandler dataHandler=new DataHandler();
         ConnectionManager connectionManager=new ConnectionManager();
         boolean check=true;
@@ -37,14 +39,22 @@ public class LoginController extends HttpServlet {
             con =connectionManager.getConnection();
             if(con==null)
                 check = false;
-            userList=dataHandler.databaseResult(con,query);
-            System.out.println("hhhhhhhhhhhhhhhh"+userList.size());
+            userMap=dataHandler.databaseResult(con,query);
+            System.out.println("hhhhhhhhhhhhhhhh"+userMap.size());
         }
         catch (SQLException e){
             e.printStackTrace();
         }
-        if (userList.size()==0){
+        if (userMap.size()==0){
             response.sendRedirect("index.html");
+        }
+        else {
+            for (Users userKey : userMap.keySet()) {
+                // System.out.println( key );
+                session.setAttribute("users", userKey);
+                session.setAttribute("profile", userMap.get(userKey));
+            }
+            response.sendRedirect("Dashboard.jsp");
         }
     }
 

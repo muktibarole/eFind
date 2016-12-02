@@ -52,6 +52,7 @@ public class SignUpController extends javax.servlet.http.HttpServlet  {
         HttpSession session =request.getSession();
         session.setAttribute("users",users);
         doGet(request,response);
+        response.sendRedirect("Dashboard.jsp");
 
 }
 

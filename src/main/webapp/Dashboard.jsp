@@ -185,11 +185,11 @@ desired effect
       <ul class="sidebar-menu">
         <li class="header">HEADER</li>
         <!-- Optionally, you can add icons to the links -->
-        <li class="active"><a href="#"><i class="fa fa-link"></i> <span>GPA</span></a></li>
-        <li><a href="#"><i class="fa fa-link"></i> <span>Department</span></a></li>
-        <li><a href="#"><i class="fa fa-link"></i> <span>Programs</span></a></li>
-        <li><a href="#"><i class="fa fa-link"></i> <span>Skills</span></a></li>
-        <li><a href="#"><i class="fa fa-link"></i> <span>Project</span></a></li>
+        <li class="active"><a href="Dashboard?col=gpa"><i class="fa fa-link"></i> <span>GPA</span></a></li>
+        <li><a href="#"><i class="fa fa-link"id="gpa"></i> <span>Department</span></a></li>
+        <li><a href="#"><i class="fa fa-link"id="dept"></i> <span>Programs</span></a></li>
+        <li><a href="#"><i class="fa fa-link"id="prgm"></i> <span>Skills</span></a></li>
+        <li><a href="#"><i class="fa fa-link"id="skl"></i> <span>Project</span></a></li>
      
         <li class="treeview">
           <a href="#"><i class="fa fa-link"></i> <span>Multilevel</span>
@@ -221,15 +221,27 @@ desired effect
 
     <!-- Main content -->
     <section class="content">
-
-      <!-- Your Page Content Here -->
+      <div class='hide1' id="gpa1">
+      <c:forEach var="usermap" items="${userMap}">
+        <c:if test="${users.getUid() != usermap.key.getUid()}">
+          <br> <a href="profile?${usermap.key.getUid()}"> <c:out value="${usermap.key.getFirstName()}"/> <c:out value="${usermap.key.getLastName()}"/></a>
+          <c:out value="${usermap.value.getGpa()}"/>
+        </c:if>
+      </c:forEach>
+      </div>
+        <div class='hide1' id='gpa11'>gpa</div>
+        <div class='hide1' id='dept1'>dept</div>
+        <div class='hide1' id='prgm1'>prgm</div>
+        <div class='hide1' id='skl1'>skl</div>
+        <div class='hide1' id='prjct1'>prjc</div>
+        <!-- Your Page Content Here -->
 
     </section>
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
 
-  <!-- Main Footer -->
+  <-- Main Footer -->
 </div>
   
  
@@ -241,6 +253,19 @@ desired effect
 <script src="vendors/Dashboard/bootstrap/js/bootstrap.min.js"></script>
 <!-- AdminLTE App -->
 <script src="vendors/Dashboard/dist/js/app.min.js"></script>
+<script>
+
+
+
+    function showOne(id) {
+        console.log("11111111111111"+id)
+        $('.hide1').not('#' + id +'1').hide();
+    }
+    $('#button_1').click(function() {
+        showOne( $('div.fa.fa-link').attr('id') );
+    });
+
+</script>
 <!-- Optionally, you can add Slimscroll and FastClick plugins.
      Both of these plugins are recommended to enhance the
      user experience. Slimscroll is required when using the

@@ -1,41 +1,43 @@
 package util;
 
 
+import model.Profile;
 import model.Users;
 
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by Prajwal on 11/6/2016.
  */
 public class DataHandler {
-    public List databaseResult(Connection c, String query) throws SQLException{
-        List<Users>list=new ArrayList();
+    public Map databaseResult(Connection c, String query) throws SQLException{
+        Map<Users, Profile> map=new LinkedHashMap<Users, Profile>();
         Statement stmt=c.createStatement();
         ResultSet rs=stmt.executeQuery(query);
         try{
             while(rs.next()) {
 
-                /*System.out.println("nnnnnnnnnnnnnnnnnnn" + rs.getInt(1));
-                System.out.println("nnnnnnnnnnnnnnnnnnn" + rs.getString(2));
-                System.out.println("nnnnnnnnnnnnnnnnnnn" + rs.getString(3));
-                System.out.println("nnnnnnnnnnnnnnnnnnn" + rs.getString(4));
-                System.out.println("nnnnnnnnnnnnnnnnnnn" + rs.getString(5));
-                System.out.println("nnnnnnnnnnnnnnnnnnn" + rs.getString(6));
-                System.out.println("nnnnnnnnnnnnnnnnnnn" + rs.getString(7));
-                System.out.println("nnnnnnnnnnnnnnnnnnn" + rs.getString(8));
+                /*System.out.println("nnnnnnnnnnnnnnnnnnn" + rs.getString(9));
+                System.out.println("nnnnnnnnnnnnnnnnnnn" + rs.getString(10));
+                System.out.println("nnnnnnnnnnnnnnnnnnn" + rs.getString(11));
+                System.out.println("nnnnnnnnnnnnnnnnnnn" + rs.getString(12));*/
+                System.out.println("nnnnnnnnnnnnnnnnnnn" + rs.getString("gpa"));
+               /* System.out.println("nnnnnnnnnnnnnnnnnnn" + rs.getString(14));
+                System.out.println("nnnnnnnnnnnnnnnnnnn" + rs.getString(15));
+                System.out.println("nnnnnnnnnnnnnnnnnnn" + rs.getString(16));
+                System.out.println("nnnnnnnnnnnnnnnnnnn" + rs.getString(17));
                 System.out.println("newwwwwwwwwwwwwwwwwwwww");*/
                 Users user=new Users(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6),rs.getString(7),rs.getString(8));
-                list.add(user);
+                Profile profile=new Profile(rs.getString(10),rs.getString(11),rs.getString(12),rs.getString(13),rs.getString(14),rs.getString(15),rs.getString(16),rs.getString(17));
+                map.put(user,profile);
             }
         }
         catch(NullPointerException n){n.printStackTrace();}
         finally {
             c.close();
         }
-        return list;
+        return map;
     }
 
     public void databaseDelete(Connection c,String query) throws SQLException {
@@ -104,6 +106,20 @@ public class DataHandler {
         }
     }
 
+    public void processQuery(Connection con, String query)throws SQLException{
+        Statement stmt=con.createStatement();
+        ResultSet rs=stmt.executeQuery(query);
+        try {
+            while (rs.next()) {
+            }
+        }
+        catch (NullPointerException s){
+
+        }
+        finally {
+            con.close();
+        }
+    }
 }
 
 
