@@ -224,7 +224,7 @@ desired effect
       <div class='hide1' id="gpa1">
       <c:forEach var="usermap" items="${userMap}">
         <c:if test="${(users.getUid() != usermap.key.getUid())and(usermap.key.getAccountType() ne 'faculty')}">
-          <br> <a href="profile?${usermap.key.getUid()}"> <c:out value="${usermap.value.getFirstName()}"/> <c:out value="${usermap.value.getLastName()}"/></a>
+          <br> <a href="Profile?uid=${usermap.key.getUid()}"> <c:out value="${usermap.value.getFirstName()}"/> <c:out value="${usermap.value.getLastName()}"/></a>
           <c:out value="${usermap.value.getGpa()}"/></c:if>
       </c:forEach>
       </div>

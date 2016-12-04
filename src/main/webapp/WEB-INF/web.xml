@@ -37,6 +37,14 @@
   </servlet-mapping>
 
   <servlet>
+    <servlet-name>profile</servlet-name>
+    <servlet-class>controller.ProfileController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>profile</servlet-name>
+    <url-pattern>/Profile</url-pattern>
+  </servlet-mapping>
+  <servlet>
     <servlet-name>search</servlet-name>
     <servlet-class>controller.SearchController</servlet-class>
   </servlet>
@@ -55,13 +63,51 @@
   </servlet-mapping>
 
   <filter>
-    <filter-name>MyFilter</filter-name>
+    <filter-name>DashboardFilter</filter-name>
     <filter-class>filter.DashboardFilter</filter-class>
   </filter>
   <filter-mapping>
-    <filter-name>MyFilter</filter-name>
+    <filter-name>DashboardFilter</filter-name>
     <url-pattern>/Dashboard.jsp</url-pattern>
   </filter-mapping>
+  <filter-mapping>
+    <filter-name>DashboardFilter</filter-name>
+    <url-pattern>/Profile_fac.jsp</url-pattern>
+  </filter-mapping>
+  <filter-mapping>
+    <filter-name>DashboardFilter</filter-name>
+    <url-pattern>/Profile_stu.jsp</url-pattern>
+  </filter-mapping>
+  <filter-mapping>
+  <filter-name>DashboardFilter</filter-name>
+  <url-pattern>/Profile.jsp</url-pattern>
+</filter-mapping>
+  <!--<filter>
+    <filter-name>ProfileFilter</filter-name>
+    <filter-class>filter.DashboardFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>ProfileFilter</filter-name>
+    <url-pattern>/Profile.jsp</url-pattern>
+  </filter-mapping>
+
+  <filter>
+    <filter-name>ProfileStudentFilter</filter-name>
+    <filter-class>filter.DashboardFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>ProfileStudentFilter</filter-name>
+    <url-pattern>/Profile_stu.jsp</url-pattern>
+  </filter-mapping>
+
+  <filter>
+    <filter-name>ProfileFacultyFilter</filter-name>
+    <filter-class>filter.DashboardFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>ProfileFacultyFilter</filter-name>
+    <url-pattern>/Profile_fac.jsp</url-pattern>
+  </filter-mapping>-->
 
     <welcome-file-list>
     <welcome-file>index.html</welcome-file>

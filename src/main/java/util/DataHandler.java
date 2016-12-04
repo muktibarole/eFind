@@ -248,6 +248,34 @@ public class DataHandler {
         return profileList ;
     }
 
+    public Profile getProfile(Connection c, String query) throws SQLException{
+        Profile profile =null;
+        Statement stmt=c.createStatement();
+        ResultSet rs=stmt.executeQuery(query);
+        try{
+            while(rs.next()) {
+
+                /*System.out.println("nnnnnnnnnnnnnnnnnnn" + rs.getString(9));
+                System.out.println("nnnnnnnnnnnnnnnnnnn" + rs.getString(10));
+                System.out.println("nnnnnnnnnnnnnnnnnnn" + rs.getString(11));
+                System.out.println("nnnnnnnnnnnnnnnnnnn" + rs.getString(12));*/
+                //System.out.println("nnnnnnnnnnnnnnnnnnn" + rs.getString("gpa"));
+                System.out.println("zzzzzzzzzzzzzzzzzzz" + rs.getString("username"));
+               /* System.out.println("nnnnnnnnnnnnnnnnnnn" + rs.getString());
+                System.out.println("nnnnnnnnnnnnnnnnnnn" + rs.getString(16));
+                System.out.println("nnnnnnnnnnnnnnnnnnn" + rs.getString(17));
+                System.out.println("newwwwwwwwwwwwwwwwwwwww");*/
+                profile=new Profile(rs.getInt("uid"),rs.getString("username"),rs.getString("firstName"),rs.getString("lastName"),rs.getString("tnumber"),rs.getString("program"),rs.getString("department"),rs.getString("gpa"),rs.getString("skills"),rs.getString("interest"),rs.getString("projects"));
+
+            }
+        }
+        catch(NullPointerException n){n.printStackTrace();}
+        finally{
+            c.close();
+        }
+
+        return profile ;
+    }
 }
 
 
