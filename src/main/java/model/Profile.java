@@ -5,7 +5,10 @@ package model;
  */
 public class Profile {
 
-    private String uid;
+    private int uid;
+    private String firstName;
+    private String lastName;
+    private String userName;
     private String tnumber;
     private String department;
     private String program;
@@ -14,8 +17,21 @@ public class Profile {
     private String projects;
     private String interest;
 
-    public  Profile(String uid, String tnumber, String department, String program, String gpa, String skills, String projects, String interest) {
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+
+
+    public  Profile(int uid,String username,String firstName,String lastName,String tnumber, String program, String department, String gpa, String skills, String interest, String projects) {
         this.uid = uid;
+        this.firstName=firstName;
+        this.lastName=lastName;
+        this.userName=username;
         this.tnumber = tnumber;
         this.department = department;
         this.program = program;
@@ -25,8 +41,20 @@ public class Profile {
         this.interest = interest;
     }
 
-    public String getUid() {
+    public int getUid() {
         return uid;
+    }
+
+    public String getFirstname(){
+        return firstName;
+    }
+
+    public String getLastname(){
+        return lastName;
+    }
+
+    public String getUserName(){
+        return userName;
     }
 
     public String getTnumber() {

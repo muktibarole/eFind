@@ -28,8 +28,8 @@ public class DataHandler {
                 System.out.println("nnnnnnnnnnnnnnnnnnn" + rs.getString(16));
                 System.out.println("nnnnnnnnnnnnnnnnnnn" + rs.getString(17));
                 System.out.println("newwwwwwwwwwwwwwwwwwwww");*/
-                Users user=new Users(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6),rs.getString(7),rs.getString(8));
-                Profile profile=new Profile(rs.getString(10),rs.getString(11),rs.getString(12),rs.getString(13),rs.getString(14),rs.getString(15),rs.getString(16),rs.getString(17));
+                Users user=new Users(rs.getInt("uid"),rs.getString("username"),rs.getString("email_id"),rs.getString("password"),rs.getString("telephone"),rs.getString("account_type"));
+                Profile profile=new Profile(rs.getInt("uid"),rs.getString("username"),rs.getString("firstName"),rs.getString("lastName"),rs.getString("userName"),rs.getString("tnumber"),rs.getString("department"),rs.getString("program"),rs.getString("gpa"),rs.getString("skills"),rs.getString("skills"));
                 map.put(user,profile);
             }
         }
@@ -49,17 +49,17 @@ public class DataHandler {
         int uid=0;
         try{
 
-            String query="INSERT INTO users (username,firstname,lastname,email_id,password,telephone,account_type) VALUES (?,?,?,?,?,?,?)";
+            String query="INSERT INTO users (username,email_id,password,telephone,account_type) VALUES (?,?,?,?,?)";
             PreparedStatement statement = c.prepareStatement(query,Statement.RETURN_GENERATED_KEYS);
 
 
             statement.setString(1, u.getUsername());
-            statement.setString(2,u.getFirstName());
-            statement.setString(3, u.getLastName());
-            statement.setString(4, u.getEmailId());
-            statement.setString(5, u.getPassword());
-            statement.setString(6, u.getTelephone());
-            statement.setString(7, u.getAccountType().toString());
+            statement.setString(2,u.getEmailId());
+            statement.setString(3,u.getPassword()) ;
+            statement.setString(4,u.getTelephone()) ;
+            statement.setString(5,u.getAccountType()) ;
+
+
 
 
             statement.execute();
@@ -78,6 +78,62 @@ public class DataHandler {
         return uid;
     }
 
+    public  int databaseInsert2(Connection c, Profile p) throws SQLException{
+
+        int count=0;
+        boolean i=false;
+        try{
+
+            String query="INSERT INTO profile (uid,firstName,lastName,userName,tnumber,department,program,gpa,skills,projects,interest) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
+            PreparedStatement statement = c.prepareStatement(query,Statement.RETURN_GENERATED_KEYS);
+
+
+            statement.setInt(1,p.getUid());
+            statement.setString(2,p.getFirstName());
+            statement.setString(3,p.getLastName()) ;
+            statement.setString(4,p.getUserName()) ;
+            statement.setString(5,p.getTnumber()) ;
+            statement.setString(6,p.getDepartment()) ;
+            statement.setString(7,p.getProgram()) ;
+            statement.setString(8,p.getGpa()) ;
+            statement.setString(9,p.getSkills()) ;
+            statement.setString(10,p.getProjects()) ;
+            statement.setString(11,p.getInterest()) ;
+
+
+
+
+              count=statement.executeUpdate();
+
+
+
+        }
+        catch(SQLException e){
+            e.printStackTrace();
+        }
+        finally{
+            c.close();
+        }
+        System.out.println("kkkkkkkkkkkkkkkkkkkkkkk"+count);
+        return count;
+    }
+
+        public boolean usernameIsavailabe(Connection c,String query)throws SQLException{
+            boolean isAvailable=true;
+            System.out.println("11111111111111"+query);
+            PreparedStatement statement=c.prepareStatement(query);
+            ResultSet rs=statement.executeQuery(query);
+            while(rs.next()){
+                String t=rs.getString("username")+"1111111111111111111111";
+                System.out.println(""+t);
+            if(t==null ||t.equalsIgnoreCase("")||t.equals(null));
+                isAvailable=false;
+
+            }
+            System.out.println("jjjjjjjjjjjjj"+isAvailable);
+            return isAvailable;
+        }
+
     public void databaseUpdate(Connection c, Users u) throws SQLException{
 
         try{
@@ -87,8 +143,6 @@ public class DataHandler {
 
 
             statement.setString(1, u.getUsername());
-            statement.setString(2, u.getFirstName());
-            statement.setString(3, u.getLastName());
             statement.setString(4, u.getEmailId());
             statement.setString(5, u.getPassword());
             statement.setString(6, u.getTelephone());
@@ -120,6 +174,11 @@ public class DataHandler {
             con.close();
         }
     }
+
+
+
+
+
 }
 
 

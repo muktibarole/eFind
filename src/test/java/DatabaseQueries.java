@@ -16,7 +16,7 @@ public class DatabaseQueries {
 
     @Test
     public void write(){
-        Users users=new Users("prajwalfc","Prajwal","Khatiwada","prajwal_k@live.com","prajwalk","3479719306", "Student");
+        Users users=new Users("prajwalfc","prajwal_k@live.com","prajwalk","3479719306", "Student");
 
         ConnectionManager connectionManager=new ConnectionManager();
         boolean check=true;

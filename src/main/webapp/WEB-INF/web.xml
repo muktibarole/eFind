@@ -36,6 +36,24 @@
     <url-pattern>/Dashboard</url-pattern>
   </servlet-mapping>
 
+  <servlet>
+    <servlet-name>signup2</servlet-name>
+    <servlet-class>controller.SignUpController2</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>signup2</servlet-name>
+    <url-pattern>/signup2</url-pattern>
+  </servlet-mapping>
+
+  <filter>
+    <filter-name>MyFilter</filter-name>
+    <filter-class>filter.DashboardFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>MyFilter</filter-name>
+    <url-pattern>/Dashboard.jsp</url-pattern>
+  </filter-mapping>
+
     <welcome-file-list>
     <welcome-file>index.html</welcome-file>
     <welcome-file>index.htm</welcome-file>

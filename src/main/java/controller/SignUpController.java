@@ -21,38 +21,49 @@ public class SignUpController extends javax.servlet.http.HttpServlet  {
     protected void doPost(javax.servlet.http.HttpServletRequest request, javax.servlet.http.HttpServletResponse response) throws javax.servlet.ServletException, IOException {
 
         int uid=0;
-        String username= request.getParameter("username");
-        String firstName= request.getParameter("firstname");
-        String lastName= request.getParameter("lastname");
-        String email= request.getParameter("email");
-        String password= request.getParameter("password");
-        String repassword= request.getParameter("repassword");
-        String telephone =request.getParameter("telephone");
-        String accountType =request.getParameter("accountType");
+        boolean usernameIsaAvailable=false;
+        String username= request.getParameter("username").trim();
+        String email= request.getParameter("email").trim();
+        String password= request.getParameter("password").trim();
+        String repassword= request.getParameter("repassword").trim();
+        String telephone =request.getParameter("telephone").trim();
+        String accountType =request.getParameter("accountType").trim();
+        String usernameValidateQuery="SELECT  * FROM users WHERE username ='"+username+"' LIMIT 1";
 
         //String accountType= (account.equals("Student"))?AccountType.student:AccountType.faculty;
         //AccountType accountType= AccountType.faculty;
 
-        Users users=new Users(username,firstName,lastName,email,password,telephone,accountType);
+        Users users=new Users(username,email,password,telephone,accountType);
 
         DataHandler dataHandler=new DataHandler();
         ConnectionManager connectionManager=new ConnectionManager();
         boolean check=true;
 
+
         try{
             Connection con =connectionManager.getConnection();
             if(con==null)
                 check = false;
+            usernameIsaAvailable=dataHandler.usernameIsavailabe(con,usernameValidateQuery);
+            if (usernameIsaAvailable)
             uid = dataHandler.databaseInsert(con,users);
         }
         catch (SQLException e){
             e.printStackTrace();
         }
-        //response.sendRedirect("Dashboard.jsp");\
-        HttpSession session =request.getSession();
-        session.setAttribute("users",users);
-        doGet(request,response);
-        response.sendRedirect("Dashboard.jsp");
+        if (!usernameIsaAvailable){
+            response.sendRedirect("index.html");
+        }
+        else {
+            users.setUid(uid);
+            System.out.println("username available "+usernameIsaAvailable);
+            HttpSession session = request.getSession();
+            session.setAttribute("users", users);
+            if (accountType.equalsIgnoreCase("student"))
+                response.sendRedirect("Profile_stu.jsp");
+            else
+                response.sendRedirect("Profile_fac.jsp");
+        }
 
 }
 

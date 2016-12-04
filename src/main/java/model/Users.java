@@ -9,25 +9,21 @@ public  class Users {
 
     private int uid;
     private String username;
-    private String firstName;
-    private String lastName;
     private String emailId;
     private String password;
     private String telephone;
     private String accountType;
 
-    public Users(String username, String firstName, String lastName, String emailId, String password, String telephone, String accountType) {
+    public Users(String username, String emailId, String password, String telephone, String accountType) {
         this.username = username;
-        this.firstName = firstName;
-        this.lastName = lastName;
         this.emailId = emailId;
         this.password = password;
         this.telephone = telephone;
         this.accountType = accountType;
     }
 
-    public Users(int uid, String username, String firstName, String lastName, String emailId, String password, String telephone, String accountType) {
-        this(username, firstName, lastName, emailId, password, telephone, accountType);
+    public Users(int uid, String username, String emailId, String password, String telephone, String accountType) {
+        this(username,  emailId, password, telephone, accountType);
         this.uid = uid;
     }
 
@@ -35,16 +31,12 @@ public  class Users {
         return uid;
     }
 
+    public void setUid(int uid) {
+        this.uid = uid;
+    }
+
     public String getUsername() {
         return username;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
     }
 
     public String getEmailId() {

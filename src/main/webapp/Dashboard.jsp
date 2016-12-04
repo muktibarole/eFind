@@ -119,7 +119,7 @@ desired effect
               <!-- The user image in the navbar-->
               <img src="vendors/Dashboard/dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
               <!-- hidden-xs hides the username on small devices so only the image appears. -->
-              <span class="hidden-xs"><c:out value="${users.getFirstName()}"/></span>
+              <span class="hidden-xs"><c:out value="${profile.getFirstName()}"/></span>
             </a>
             <ul class="dropdown-menu">
               <!-- The user image in the menu -->
@@ -163,7 +163,7 @@ desired effect
           <img src="vendors/Dashboard/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
         </div>
         <div class="pull-left info">
-          <p>${users.getFirstName()} ${users.getLastName()}</p>
+          <p>${profile.getFirstName()} ${profile.getLastName()}</p>
           <!-- Status -->
           <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
         </div>
@@ -224,7 +224,7 @@ desired effect
       <div class='hide1' id="gpa1">
       <c:forEach var="usermap" items="${userMap}">
         <c:if test="${users.getUid() != usermap.key.getUid()}">
-          <br> <a href="profile?${usermap.key.getUid()}"> <c:out value="${usermap.key.getFirstName()}"/> <c:out value="${usermap.key.getLastName()}"/></a>
+          <br> <a href="profile?${usermap.key.getUid()}"> <c:out value="${usermap.value.getFirstName()}"/> <c:out value="${usermap.value.getLastName()}"/></a>
           <c:out value="${usermap.value.getGpa()}"/>
         </c:if>
       </c:forEach>
