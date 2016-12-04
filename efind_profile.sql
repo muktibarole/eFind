@@ -23,7 +23,7 @@ DROP TABLE IF EXISTS `profile`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `profile` (
-  `username` varchar(45) DEFAULT NULL,
+  `username` varchar(45) NOT NULL,
   `uid` int(11) NOT NULL,
   `firstname` varchar(45) DEFAULT NULL,
   `lastname` varchar(45) DEFAULT NULL,
@@ -33,7 +33,8 @@ CREATE TABLE `profile` (
   `gpa` varchar(45) DEFAULT NULL,
   `skills` text,
   `projects` text,
-  `interest` text
+  `interest` text,
+  PRIMARY KEY (`username`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -43,7 +44,7 @@ CREATE TABLE `profile` (
 
 LOCK TABLES `profile` WRITE;
 /*!40000 ALTER TABLE `profile` DISABLE KEYS */;
-INSERT INTO `profile` VALUES ('prajwalfc2',3,NULL,NULL,'123','cvf','sdf','5.4','sef','sdf','werf'),('prajwalfc',1,NULL,NULL,'2','ece','ece','3.33','abc,def,ghi','jkl,mno,pqr','atu,wxy,z'),('prajwalfc1',2,NULL,NULL,'21','bce','bce','4.33','abc,def,ghi','jkl,mno,pqr','atu,wxy,z'),('prajwalfc4',5,NULL,NULL,'345','xzd','asf','2.9','j v','vj','kjv'),('prajwalfc3',4,NULL,NULL,'456','sdf','sdf','1.2','wer','sdvg','sdvgs'),('prajwalfc',19,'Prajwal','Khatiwada','T00613488','ece','ele','3.6','777','past','inter'),('oo',30,'Prajwal','Khatiwada','T00613488','ece','ele','3.6','sef','dsvf','sdf'),('coskun',31,'Coskun','rock','T00613488','CS','ele','3.6','esrtgf','dgf','111'),('mmmmmmm',32,'mmm','mmm','mmm','mmm','mmm','mmm','mmm','mmm','mmm'),('coskun1',29,'corrected coskun','baral',NULL,'ece','CS',NULL,';kn;ln;ln','klhnkibhlbk',NULL);
+INSERT INTO `profile` VALUES ('coskun',31,'Coskun','rock','T00613488','CS','ele','3.6','esrtgf','dgf','111'),('coskun1',29,'corrected coskun','baral',NULL,'ece','CS',NULL,';kn;ln;ln','klhnkibhlbk',NULL),('mmmmmmm',32,'mmm','mmm','mmm','mmm','mmm','mmm','mmm','mmm','mmm'),('oo',30,'Prajwal','Khatiwada','T00613488','ece','ele','3.6','sef','dsvf','sdf'),('prajwalfc',1,'ABC','111111','2','ece','ece','3.33','abc,def,ghi','jkl,mno,pqr','atu,wxy,z'),('prajwalfc1',2,'DEF','22222222','21','bce','bce','4.33','abc,def,ghi','jkl,mno,pqr','atu,wxy,z'),('prajwalfc2',3,'GHI','33333333','123','cvf','sdf','5.4','sef','sdf','werf'),('prajwalfc3',4,'JKL','444444444','456','sdf','sdf','1.2','wer','sdvg','sdvgs'),('prajwalfc4',5,'MNO','55555555','345','xzd','asf','2.9','j v','vj','kjv');
 /*!40000 ALTER TABLE `profile` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -56,4 +57,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-12-03 21:53:43
+-- Dump completed on 2016-12-04 12:46:46

@@ -30,7 +30,7 @@ public class DataHandler {
                 System.out.println("nnnnnnnnnnnnnnnnnnn" + rs.getString(17));
                 System.out.println("newwwwwwwwwwwwwwwwwwwww");*/
                 Users user=new Users(rs.getInt("uid"),rs.getString("username"),rs.getString("email_id"),rs.getString("password"),rs.getString("telephone"),rs.getString("account_type"));
-                Profile profile=new Profile(rs.getInt("uid"),rs.getString("username"),rs.getString("firstName"),rs.getString("lastName"),rs.getString("userName"),rs.getString("tnumber"),rs.getString("department"),rs.getString("program"),rs.getString("gpa"),rs.getString("skills"),rs.getString("skills"));
+                Profile profile=new Profile(rs.getInt("uid"),rs.getString("username"),rs.getString("firstName"),rs.getString("lastName"),rs.getString("tnumber"),rs.getString("program"),rs.getString("department"),rs.getString("gpa"),rs.getString("skills"),rs.getString("interest"),rs.getString("projects"));
                 map.put(user,profile);
             }
         }
@@ -202,6 +202,21 @@ public class DataHandler {
         return user ;
     }
 
+    public Map getRowCountWithColumnValue(Connection c,String query)  throws SQLException{
+        Map<String, Integer> map=new LinkedHashMap();
+        Statement stmt=c.createStatement();
+        ResultSet rs=stmt.executeQuery(query);
+        try{
+                while(rs.next()){
+                map.put(rs.getString("department"),rs.getInt("count"));
+                }
+        }
+        catch(NullPointerException n){}
+        finally{
+            c.close();
+        }
+        return map;
+    }
 
 
 }
