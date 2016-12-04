@@ -22,10 +22,11 @@ import java.util.*;
  */
 public class LoginController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        Users users=null;
         Map<Users,Profile> userMap= new LinkedHashMap<Users, Profile>();
         //Set<Users>s=new TreeSet<Users>();
         String username= request.getParameter("username");
+        String userQuery="SELECT  * FROM users WHERE username ='"+username+"' LIMIT 1";;
         String password= request.getParameter("password");
         HttpSession session=request.getSession();
 
@@ -39,13 +40,21 @@ public class LoginController extends HttpServlet {
             con =connectionManager.getConnection();
             if(con==null)
                 check = false;
+            users=dataHandler.getUsers(con,userQuery);
             userMap=dataHandler.databaseResult(con,query);
             System.out.println("hhhhhhhhhhhhhhhh"+userMap.size());
         }
         catch (SQLException e){
             e.printStackTrace();
         }
-        if (userMap.size()==0){
+        if (userMap.size()==0&& users!=null){
+            session.setAttribute("users",users);
+            if (users.getAccountType().equalsIgnoreCase("student"))
+                response.sendRedirect("Profile_stu.jsp");
+            else
+                response.sendRedirect("Profile_fac.jsp");
+        }
+        else if (userMap.size()==0){
             response.sendRedirect("index.html");
         }
         else {

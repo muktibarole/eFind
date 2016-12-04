@@ -11,6 +11,7 @@ import java.util.*;
  * Created by Prajwal on 11/6/2016.
  */
 public class DataHandler {
+
     public Map databaseResult(Connection c, String query) throws SQLException{
         Map<Users, Profile> map=new LinkedHashMap<Users, Profile>();
         Statement stmt=c.createStatement();
@@ -175,7 +176,31 @@ public class DataHandler {
         }
     }
 
+    public Users getUsers(Connection c, String query) throws SQLException{
+        Users user=null;
+        Statement stmt=c.createStatement();
+        ResultSet rs=stmt.executeQuery(query);
+        try{
+            while(rs.next()) {
 
+                /*System.out.println("nnnnnnnnnnnnnnnnnnn" + rs.getString(9));
+                System.out.println("nnnnnnnnnnnnnnnnnnn" + rs.getString(10));
+                System.out.println("nnnnnnnnnnnnnnnnnnn" + rs.getString(11));
+                System.out.println("nnnnnnnnnnnnnnnnnnn" + rs.getString(12));*/
+                //System.out.println("nnnnnnnnnnnnnnnnnnn" + rs.getString("gpa"));
+               /* System.out.println("nnnnnnnnnnnnnnnnnnn" + rs.getString(14));
+                System.out.println("nnnnnnnnnnnnnnnnnnn" + rs.getString(15));
+                System.out.println("nnnnnnnnnnnnnnnnnnn" + rs.getString(16));
+                System.out.println("nnnnnnnnnnnnnnnnnnn" + rs.getString(17));
+                System.out.println("newwwwwwwwwwwwwwwwwwwww");*/
+                 user=new Users(rs.getInt("uid"),rs.getString("username"),rs.getString("email_id"),rs.getString("password"),rs.getString("telephone"),rs.getString("account_type"));
+
+            }
+        }
+        catch(NullPointerException n){n.printStackTrace();}
+
+        return user ;
+    }
 
 
 
