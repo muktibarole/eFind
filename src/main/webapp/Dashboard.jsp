@@ -170,9 +170,9 @@ desired effect
       </div>
 
       <!-- search form (Optional) -->
-      <form action="#" method="get" class="sidebar-form">
+      <form action="search" method="get" class="sidebar-form">
         <div class="input-group">
-          <input type="text" name="q" class="form-control" placeholder="Search...">
+          <input type="text" name="search" class="form-control" placeholder="Search...">
               <span class="input-group-btn">
                 <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
                 </button>
@@ -235,8 +235,14 @@ desired effect
 
       <c:forEach var="usermap" items="${userMap}">
 
-          <br> <a href="profile?${usermap.key.getUid()}"> <c:out value="${usermap.value.getFirstName()}"/> <c:out value="${usermap.value.getLastName()}"/></a>
+          <br> <a href="Profile?uid=${usermap.key.getUid()}"> <c:out value="${usermap.value.getFirstName()}"/> <c:out value="${usermap.value.getLastName()}"/></a>
           <c:out value="${usermap.value.getSkills()}"/>
+      </c:forEach>
+
+      <c:forEach var="usermap" items="${foreignMap}">
+
+        <br> <a href="Profile?uid=${usermap.key.getUid()}"> <c:out value="${usermap.value.getFirstName()}"/> <c:out value="${usermap.value.getLastName()}"/></a>
+        <c:out value="${usermap.value.getSkills()}"/>
       </c:forEach>
         <!-- Your Page Content Here -->
 

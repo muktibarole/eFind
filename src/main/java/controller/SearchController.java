@@ -1,6 +1,7 @@
 package controller;
 
 import model.Profile;
+import model.Users;
 import util.ConnectionManager;
 import util.DataHandler;
 
@@ -14,8 +15,10 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Prajwal on 12/4/2016.
@@ -29,9 +32,12 @@ public class SearchController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         HttpSession session = request.getSession();
+        System.out.println("SSSSSSSSSSSSSSSSSSSSSSSSSSSS");
         String search = request.getParameter("search").trim();
-        List<Profile> profileList=new LinkedList<Profile>();
-        String query="SELECT uid,username,firstname,lastname,tnumber,department,gpa,skills,projects,interest,program  FROM profile WHERE firstname LIKE '%"+search+"%' or lastname like '%"+search+"%' or department like '%"+search+"%' or skills like '%"+search+"%' or projects like '%"+search+"%' or interest like '%"+search+"%' or program like '%"+search+"%'";
+        Map<Users, Profile> map=new LinkedHashMap<Users, Profile>();
+        String query="SELECT users.*,profile.* from users\n" +
+                "inner join profile on profile.uid=users.uid\n" +
+                "where( firstname LIKE '%"+search+"%' or lastname like '%"+search+"%' or department like '%"+search+"%' or skills like '%"+search+"%' or projects like '%"+search+"%' or interest like '%"+search+"%' or program like '%"+search+"%')";
         DataHandler dataHandler=new DataHandler();
         ConnectionManager connectionManager=new ConnectionManager();
         boolean check=true;
@@ -41,12 +47,12 @@ public class SearchController extends HttpServlet {
             con =connectionManager.getConnection();
             if(con==null)
                 check = false;
-            profileList=dataHandler.getProfileList(con,query);
+            map=dataHandler.databaseResult(con,query);
         }
         catch (SQLException e){
             e.printStackTrace();
         }
-        session.setAttribute("foreignProfile",profileList);
+        session.setAttribute("foreignMap",map);
         response.sendRedirect("Dashboard.jsp");
     }
 }

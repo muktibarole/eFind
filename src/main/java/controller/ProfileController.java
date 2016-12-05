@@ -1,6 +1,7 @@
 package controller;
 
 import model.Profile;
+import model.Users;
 import util.ConnectionManager;
 import util.DataHandler;
 
@@ -14,8 +15,10 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Prajwal on 12/4/2016.
@@ -29,8 +32,8 @@ public class ProfileController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
         String uid = request.getParameter("uid").trim();
-        Profile profile=null;
-        String query="select *from profile where uid='"+uid+"'";
+        Map<Users,Profile> foreignMap= new LinkedHashMap<Users, Profile>();
+        String query="select users.*,profile.* from users inner join profile on users.uid=profile.uid where users.uid='"+uid+"'";
         DataHandler dataHandler=new DataHandler();
         ConnectionManager connectionManager=new ConnectionManager();
         boolean check=true;
@@ -40,13 +43,16 @@ public class ProfileController extends HttpServlet {
             con =connectionManager.getConnection();
             if(con==null)
                 check = false;
-            profile=dataHandler.getProfile(con,query);
+            foreignMap=dataHandler.databaseResult(con,query);
         }
         catch (SQLException e){
             e.printStackTrace();
         }
-        session.setAttribute("foreignProfile",profile);
-        //response.sendRedirect("Profile.jsp?uid="+uid);
+        for (Users userKey : foreignMap.keySet()) {
+            // System.out.println( key );
+            session.setAttribute("foreignUser", userKey);
+            session.setAttribute("foreignProfile", foreignMap.get(userKey));
+        }
         response.sendRedirect("Profile.jsp");
     }
     }
